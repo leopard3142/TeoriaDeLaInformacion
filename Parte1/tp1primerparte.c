@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#define MAX 5
-#define MAX 7
+#include <math.h>
+#define MAX 5
+//#define MAX 7
 //#define MAX 9
 
 typedef struct nodo{
     char palabra[MAX];
     int apariciones;
+    float probabilidad;
     struct nodo *sig;
 }nodo;
 typedef nodo*tlista;
@@ -15,16 +17,17 @@ typedef nodo*tlista;
 void cargoLista(tlista*);
 void muestraLista(tlista);
 void agregaLista(tlista*,char[]);
+float entropia(tlista);
 
 int main (){
     tlista L=NULL;
 
     cargoLista(&L);
     muestraLista(L);
+    printf("Entropia = %5.2f \n",entropia(L));
 
     return 0;
 }
-
 
 void cargoLista(tlista *L){
     FILE* arch;
@@ -49,7 +52,7 @@ void cargoLista(tlista *L){
         }
         fclose(arch);
     }
-    printf("Habia %d PALABRAS CODIGO en el archivo. \n",cuentaAux);
+    printf("Hay %d PALABRAS CODIGO totales en el archivo. \n",cuentaAux);
 }
 void agregaLista(tlista *L,char palabra[]){
     tlista aux=*L,nuevo;
@@ -72,9 +75,21 @@ void agregaLista(tlista *L,char palabra[]){
     }
 }
 void muestraLista(tlista L){
+    int palabrasDistintas=0;
     printf("| Palabra | Apariciones |    Probabilidad   |\n");
     while(L!=NULL){
-        printf("|  %s  |     %d     |    %5.10f   |\n",L->palabra,L->apariciones,(float)L->apariciones/(31500/MAX));
+        palabrasDistintas++;
+        L->probabilidad=(float)L->apariciones/(31500/MAX);
+        printf("|  %s  |     %d     |    %5.10f   |\n",L->palabra,L->apariciones,L->probabilidad);
         L=L->sig;
     }
+    printf("Hay %d palabras codigos distintas.\n",palabrasDistintas);
+}
+float entropia(tlista L){
+    float suma=0;
+    while(L!=NULL){
+        suma+=L->probabilidad*-log2(L->probabilidad);
+        L=L->sig;
+    }
+    return suma;
 }
