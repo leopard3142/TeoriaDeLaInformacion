@@ -15,6 +15,15 @@ public class prueba {
         }
     }
 
+    public static void calculaProbabilidades(ArrayList<Nodo> lista, int lecturasT){
+        Iterator<Nodo> it = lista.iterator();
+        Nodo act;
+        while(it.hasNext()){
+            act = it.next();
+            act.setProbabilidad(lecturasT);
+        }
+    }
+
     public static void main(String[] args) {
         final int MAX = 3;
         int lecturas = 0;
@@ -23,7 +32,7 @@ public class prueba {
         ArrayList<Nodo> palabras = new ArrayList<>();
 
         try {
-            String contenido = Files.readString(Paths.get("C:\\Users\\matias\\Desktop\\Matia\\Facu\\Teoria de la informacion\\TeoriaDeLaInformacion\\src\\main\\java\\Prueba\\text1.txt"));
+            String contenido = Files.readString(Paths.get("C:\\Users\\matias\\Desktop\\Matia\\Facu\\Teoria de la informacion\\TeoriaDeLaInformacion\\src\\main\\java\\Prueba\\text.txt"));
             StringReader reader = new StringReader(contenido);
             while(reader.read(caracteres, 0, MAX)!=-1){
                 int i = 0;
@@ -39,6 +48,7 @@ public class prueba {
                     palabras.get(i).aumentaOcurrencia();
                 }
             }
+            calculaProbabilidades(palabras, lecturas);
             imprimeLista(palabras);
         } catch (FileNotFoundException e) {
             System.out.println("No se encontro el archivo");

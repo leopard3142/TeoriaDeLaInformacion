@@ -3,6 +3,7 @@ package Prueba;
 public class Nodo {
     private String palabra;
     private int ocurrencias;
+    private double probabilidad;
 
     public Nodo(String palabra){
         this.palabra = palabra;
@@ -21,8 +22,16 @@ public class Nodo {
         return ocurrencias;
     }
 
+    public void setProbabilidad(double lecturasT) {
+        this.probabilidad = this.ocurrencias/lecturasT;
+    }
+
+    public double getProbabilidad() {
+        return probabilidad;
+    }
+
     @Override
     public String toString() {
-        return "La palabra " + this.palabra + " ha ocurrido un total de " + this.ocurrencias + " veces";
+        return "La palabra " + this.palabra + " ha ocurrido un total de " + this.ocurrencias + " veces teniendo una prob de ocurrencia de " + this.probabilidad ;
     }
 }
