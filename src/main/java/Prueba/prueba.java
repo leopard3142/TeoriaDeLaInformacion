@@ -25,14 +25,15 @@ public class prueba {
     }
 
     public static void main(String[] args) {
-        final int MAX = 3;
+        final int MAX = 5;
         int lecturas = 0;
         char [] caracteres = new char[MAX];
         String cadena = null;
         ArrayList<Nodo> palabras = new ArrayList<>();
 
         try {
-            String contenido = Files.readString(Paths.get("C:\\Users\\matias\\Desktop\\Matia\\Facu\\Teoria de la informacion\\TeoriaDeLaInformacion\\src\\main\\java\\Prueba\\text.txt"));
+            String contenido = Files.readString(Paths.get("text.txt"));
+            //String contenido = Files.readString(Paths.get("text.txt"));
             StringReader reader = new StringReader(contenido);
             while(reader.read(caracteres, 0, MAX)!=-1){
                 int i = 0;
