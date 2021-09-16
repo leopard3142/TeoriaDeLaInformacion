@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class prueba {
 
@@ -25,21 +26,24 @@ public class prueba {
     }
 
     public static void main(String[] args) {
-        final int MAX = 5;
+        final int MAX;
         int lecturas = 0;
-        char [] caracteres = new char[MAX];
-        String cadena = null;
+        char [] caracteres;
+        String cadena;
         ArrayList<Nodo> palabras = new ArrayList<>();
+        Scanner scanner =  new Scanner(System.in);
 
+        System.out.println("Ingrese la longitud de cada símbolo");
+        MAX = scanner.nextInt();
+        caracteres = new char[MAX];
         try {
             String contenido = Files.readString(Paths.get("text.txt"));
             //String contenido = Files.readString(Paths.get("text.txt"));
             StringReader reader = new StringReader(contenido);
-            while(reader.read(caracteres, 0, MAX)!=-1){
+            while(reader.read(caracteres, 0, MAX) != -1){
                 int i = 0;
                 lecturas++;
                 cadena = String.valueOf(caracteres);
-                System.out.println(cadena);
                 while(i<palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)){
                     i++;
                 }
@@ -51,9 +55,7 @@ public class prueba {
             }
             calculaProbabilidades(palabras, lecturas);
             imprimeLista(palabras);
-        } catch (FileNotFoundException e) {
-            System.out.println("No se encontro el archivo");
-        } catch (IOException e){
+        }catch (IOException e){
             System.out.println("No se encontro el archivo");
         }
     }
