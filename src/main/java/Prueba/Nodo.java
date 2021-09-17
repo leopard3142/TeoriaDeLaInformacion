@@ -5,12 +5,12 @@ public class Nodo {
     private int ocurrencias;
     private double probabilidad;
 
-    public Nodo(String palabra){
+    public Nodo(String palabra) {
         this.palabra = palabra;
         this.ocurrencias = 1;
     }
 
-    public void aumentaOcurrencia(){
+    public void aumentaOcurrencia() {
         this.ocurrencias++;
     }
 
@@ -23,7 +23,7 @@ public class Nodo {
     }
 
     public void setProbabilidad(double lecturasT) {
-        this.probabilidad = this.ocurrencias/lecturasT;
+        this.probabilidad = this.ocurrencias / lecturasT;
     }
 
     public double getProbabilidad() {
@@ -32,6 +32,7 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return "La palabra " + this.palabra + " ha ocurrido un total de " + this.ocurrencias + " veces teniendo una prob de ocurrencia de " + this.probabilidad ;
+        return "La palabra " + this.palabra + " ha ocurrido un total de " + this.ocurrencias
+                + " veces teniendo una prob de ocurrencia de " + this.probabilidad;
     }
 }

@@ -10,29 +10,45 @@ import java.util.Scanner;
 
 public class prueba {
 
-    public static void imprimeLista(ArrayList<Nodo> lista){
+    public static void imprimeLista(ArrayList<Nodo> lista) {
         Iterator<Nodo> it = lista.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             System.out.println(it.next().toString());
         }
+        System.out.println("La entropia de la fuente es: " + calculaEntropia(lista));
     }
 
-    public static void calculaProbabilidades(ArrayList<Nodo> lista, int lecturasT){
+    public static void calculaProbabilidades(ArrayList<Nodo> lista, int lecturasT) {
         Iterator<Nodo> it = lista.iterator();
         Nodo act;
-        while(it.hasNext()){
+        while (it.hasNext()) {
             act = it.next();
             act.setProbabilidad(lecturasT);
         }
     }
 
-    public static void longVar(String path){
+    public static double log2(double numero) { // Logaritmo en base 2 (hay que crear la funcion porque java no la trae)
+        double result = (double) (Math.log(numero) / Math.log(2));
+        return result;
+    }
+
+    public static double calculaEntropia(ArrayList<Nodo> lista) {
+        double entropia = 0;
+        double probabilidad;
+        for (int i = 0; i < lista.size(); i++) {
+            probabilidad = lista.get(i).getProbabilidad();
+            entropia += probabilidad * log2(1 / probabilidad);
+        }
+        return entropia;
+    }
+
+    public static void longVar(String path) {
         final int MAX;
         int lecturas = 0;
-        char [] caracteres;
+        char[] caracteres;
         String cadena;
         ArrayList<Nodo> palabras = new ArrayList<>();
-        Scanner scanner =  new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Ingrese la longitud de cada símbolo");
         MAX = scanner.nextInt();
@@ -40,34 +56,40 @@ public class prueba {
         try {
             String contenido = Files.readString(Paths.get(path));
             StringReader reader = new StringReader(contenido);
-            while(reader.read(caracteres, 0, MAX) != -1){
+            while (reader.read(caracteres, 0, MAX) != -1) {
                 int i = 0;
                 lecturas++;
                 cadena = String.valueOf(caracteres);
-                while(i<palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)){ //recorre la lista de nodos a ver si coincide alguna ocurrencia
+                while (i < palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) { // recorre la
+                                                                                                        // lista de
+                                                                                                        // nodos a ver
+                                                                                                        // si coincide
+                                                                                                        // alguna
+                                                                                                        // ocurrencia
                     i++;
                 }
-                if(i==palabras.size()){
-                    palabras.add( new Nodo(cadena));
-                }else{
+                if (i == palabras.size()) {
+                    palabras.add(new Nodo(cadena));
+                } else {
                     palabras.get(i).aumentaOcurrencia();
                 }
             }
             calculaProbabilidades(palabras, lecturas);
             imprimeLista(palabras);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("No se encontró el archivo");
         }
+        scanner.close();
     }
 
     public static void main(String[] args) {
-        //longVar("text.txt");
-        condVar("text.txt");
+        longVar("text.txt");
+        // condVar("text.txt");
     }
 
     private static void condVar(String path) {
         String act, ant;
-        char [] lectura =  new char[2];
+        char[] lectura = new char[2];
         int cantT = 0;
         double[][] mat = new double[4][4];
         HashMap<String, Integer> codigos = new HashMap<>();
@@ -83,22 +105,23 @@ public class prueba {
             reader.read(lectura, 0, 2);
             ant = String.valueOf(lectura);
             cantT++;
-            while(reader.read(lectura, 0, 2) != -1){
+            while (reader.read(lectura, 0, 2) != -1) {
                 act = String.valueOf(lectura);
                 cantT++;
-                mat[codigos.get(ant)][codigos.get(act)]++; //aumenta la cantidad de ocurrencias en la fila del anterior, columna del actual
+                mat[codigos.get(ant)][codigos.get(act)]++; // aumenta la cantidad de ocurrencias en la fila del
+                                                           // anterior, columna del actual
                 ant = act;
             }
 
-            for(int i = 0; i<4 ; i++)
-                for(int j = 0;  j<4 ; j++)
-                    mat[i][j]/=cantT; //se hace el promedio de ocurrencias
-            for(int i = 0; i<4 ; i++){
-                for(int j = 0;  j<4 ; j++)
+            for (int i = 0; i < 4; i++)
+                for (int j = 0; j < 4; j++)
+                    mat[i][j] /= cantT; // se hace el promedio de ocurrencias
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++)
                     System.out.print(mat[i][j] + " ");
                 System.out.println();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("No se encontró el archivo");
         }
     }
