@@ -83,8 +83,8 @@ public class prueba {
     }
 
     public static void main(String[] args) {
-        longVar("text.txt");
-        // condVar("text.txt");
+        // longVar("text.txt");
+        condVar("text.txt");
     }
 
     private static void condVar(String path) {
@@ -113,6 +113,34 @@ public class prueba {
                 ant = act;
             }
 
+            for (int i = 0; i < mat.length; i++) {
+                for (int j = 0; j < mat.length; j++) {
+                    System.out.print(mat[i][j] + " ");;
+                }
+                System.out.println();
+            }
+            System.out.println(cantT);
+
+            int [] columnas = new int[4]; // vector para almacenar el total de cada columna
+            int totalcolumna =0;
+            
+            for (int j = 0; j < mat.length; j++) {    // calcula el total de cada columna
+                for (int i = 0; i < mat.length; i++) {
+                    totalcolumna+= mat[i][j];
+                }
+                columnas[j] = totalcolumna;
+                totalcolumna = 0;
+            }
+
+            for (int i = 0; i < mat.length; i++) {  // calcula la probabilidad de ocurrencia dividiendo por el total de cada columna
+                for (int j = 0; j < columnas.length; j++) {
+                    mat[i][j]/= columnas[j];
+                    System.out.print(mat[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+            /*
             for (int i = 0; i < 4; i++)
                 for (int j = 0; j < 4; j++)
                     mat[i][j] /= cantT; // se hace el promedio de ocurrencias
@@ -121,6 +149,8 @@ public class prueba {
                     System.out.print(mat[i][j] + " ");
                 System.out.println();
             }
+            */
+            
         } catch (IOException e) {
             System.out.println("No se encontró el archivo");
         }
