@@ -108,8 +108,8 @@ public class prueba {
             while (reader.read(lectura, 0, 2) != -1) {
                 act = String.valueOf(lectura);
                 cantT++;
-                mat[codigos.get(ant)][codigos.get(act)]++; // aumenta la cantidad de ocurrencias en la fila del
-                                                           // anterior, columna del actual
+                mat[codigos.get(act)][codigos.get(ant)]++; // aumenta la cantidad de ocurrencias en la fila del
+                                                           // actual, columna del anterior
                 ant = act;
             }
 
