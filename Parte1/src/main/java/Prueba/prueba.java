@@ -12,6 +12,7 @@ public class prueba {
 
     public static void imprimeLista(ArrayList<Nodo> lista) {
         Iterator<Nodo> it = lista.iterator();
+        System.out.println("|  Palabra  |  Probabilidad  |");
         while (it.hasNext()) {
             System.out.println(it.next().toString());
         }
@@ -50,7 +51,7 @@ public class prueba {
         ArrayList<Nodo> palabras = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Ingrese la longitud de cada símbolo");
+        System.out.println("Ingrese la longitud de cada simbolo");
         MAX = scanner.nextInt();
         caracteres = new char[MAX];
         try {
@@ -60,7 +61,7 @@ public class prueba {
                 int i = 0;
                 lecturas++;
                 cadena = String.valueOf(caracteres);
-                while (i < palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) { // recorre la
+                while (i<palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) { // recorre la
                                                                                                         // lista de
                                                                                                         // nodos a ver
                                                                                                         // si coincide
@@ -77,13 +78,13 @@ public class prueba {
             calculaProbabilidades(palabras, lecturas);
             imprimeLista(palabras);
         } catch (IOException e) {
-            System.out.println("No se encontró el archivo");
+            System.out.println("Error al abrir el archivo.");
         }
         scanner.close();
     }
 
     public static void main(String[] args) {
-        // longVar("text.txt");
+        longVar("text.txt");
         condVar("text.txt");
     }
 
@@ -152,7 +153,7 @@ public class prueba {
             */
             
         } catch (IOException e) {
-            System.out.println("No se encontró el archivo");
+            System.out.println("No se encontro el archivo");
         }
     }
 }

@@ -32,7 +32,6 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return "La palabra " + this.palabra + " ha ocurrido un total de " + this.ocurrencias
-                + " veces teniendo una prob de ocurrencia de " + this.probabilidad;
+        return "|   "+this.palabra + "   | " + this.probabilidad;
     }
 }
