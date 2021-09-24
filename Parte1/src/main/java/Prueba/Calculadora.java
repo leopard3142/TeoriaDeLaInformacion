@@ -1,6 +1,9 @@
 package Prueba;
 
 import java.util.Iterator;
+
+import javax.ws.rs.MatrixParam;
+
 import java.util.ArrayList;
 
 
@@ -42,5 +45,28 @@ public class Calculadora {
             entropia += probabilidad * log2(1 / probabilidad);
         }
         return entropia;
+    }
+
+    public double [][] multiplicaMatrizCuadrada(double [][] matrizA , double [][] matrizB){
+
+        double [][] result = new double[matrizA.length][matrizB.length];
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result.length; j++) {
+                result[i][j] = 0;
+                for (int k = 0; k < result.length; k++) {
+                    result[i][j]+= matrizA[i][k] * matrizB[k][j];
+                }
+            }
+        }
+        return result;
+    }
+
+
+    public double [][] calculaPotenciaMatriz(double [][] matriz, int p){
+        double [][] resultado = matriz;
+        for (int i = 1; i < p; i++) {
+            resultado = multiplicaMatrizCuadrada(resultado, matriz);
+        }
+        return resultado;
     }
 }
