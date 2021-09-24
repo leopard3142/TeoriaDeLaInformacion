@@ -32,6 +32,10 @@ public class Nodo {
 
     @Override
     public String toString() {
-        return "|   "+this.palabra + "   | " + this.probabilidad;
+        String spaces = " ";
+        for (int i = 0; i < (10 - this.palabra.length()); i++) {
+            spaces+= " ";
+        }
+        return "|   "+this.palabra + spaces + "| " + this.probabilidad;
     }
 }

@@ -8,11 +8,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
+
 public class prueba {
 
     public static void imprimeLista(ArrayList<Nodo> lista) {
         Iterator<Nodo> it = lista.iterator();
-        System.out.println("|  Palabra  |  Probabilidad  |");
+        System.out.println("|  Palabra     |  Probabilidad  |");
         while (it.hasNext()) {
             System.out.println(it.next().toString());
         }
@@ -20,34 +21,17 @@ public class prueba {
     }
     
     public static void main(String[] args) {
-        //longVar("text.txt");
-        double [][] matCondicional = condVar("text.txt");
-        vectorEstacionario(matCondicional);
-
-        // double [][] m = new double [3][3]; 
-        // m[0][0] = 0.6;
-        // m[0][1] = 0.4;
-        // m[0][2] = 0.1;
-        // m[1][0] = 0.3;
-        // m[1][1] = 0.4;
-        // m[1][2] = 0.4;
-        // m[2][0] = 0.1;
-        // m[2][1] = 0.2;
-        // m[2][2] = 0.5;
-        // double [][] result = Calculadora.getInstance().calculaPotenciaMatriz(m, 100);
-        // for (int i = 0; i < result.length; i++) {
-        //     for (int j = 0; j < result.length; j++) {
-        //         System.out.print(result[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
-
-
-        
+        longVar("text.txt");
+        double [][] matrizCondicional = condVar("text.txt");
+        double [] vectorEstacionario = vectorEstacionario(matrizCondicional);
+        System.out.println("Entropia de la fuente Markoviana: ");
+        System.out.println(Calculadora.getInstance().calculaEntropiaMarkoviana(matrizCondicional, vectorEstacionario));
     }
 
 
-    public static void longVar(String path) {
+    // Devuelve una matriz condicional, toma como parametro el path al archivo de sucesos.
+
+    public static void longVar(String path) { 
         final int MAX;
         int lecturas = 0;
         char[] caracteres;
@@ -159,7 +143,7 @@ public class prueba {
         return mat;
     }
 
-    public static void vectorEstacionario(double[][] matrizCondicional){
+    public static double[] vectorEstacionario(double[][] matrizCondicional){
         double [] vector = new double[matrizCondicional.length];
         double [][] matAux = Calculadora.getInstance().calculaPotenciaMatriz(matrizCondicional,100);
         double sum = 0;
@@ -172,5 +156,6 @@ public class prueba {
         System.out.println();}
         System.out.println("----------Suma del vector estacionario ----------");
         System.out.println(sum);
+        return vector;
     }
 }

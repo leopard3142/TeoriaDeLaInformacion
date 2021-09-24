@@ -2,8 +2,6 @@ package Prueba;
 
 import java.util.Iterator;
 
-import javax.ws.rs.MatrixParam;
-
 import java.util.ArrayList;
 
 
@@ -68,5 +66,16 @@ public class Calculadora {
             resultado = multiplicaMatrizCuadrada(resultado, matriz);
         }
         return resultado;
+    }
+
+    public double calculaEntropiaMarkoviana(double [][] matrizCondicional,double [] vectorEstacionario ){
+        double entropia = 0;
+        for (int i = 0; i < vectorEstacionario.length; i++) {
+            for (int j = 0; j < matrizCondicional.length; j++) {
+                entropia += matrizCondicional[i][j] * log2(1/matrizCondicional[i][j]);
+            }
+            entropia *=vectorEstacionario[i];
+        }
+        return entropia;
     }
 }
