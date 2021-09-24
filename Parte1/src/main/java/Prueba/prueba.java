@@ -50,7 +50,6 @@ public class prueba {
         String cadena;
         ArrayList<Nodo> palabras = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Ingrese la longitud de cada simbolo");
         MAX = scanner.nextInt();
         caracteres = new char[MAX];
