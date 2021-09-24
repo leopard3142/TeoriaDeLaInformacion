@@ -16,32 +16,14 @@ public class prueba {
         while (it.hasNext()) {
             System.out.println(it.next().toString());
         }
-        System.out.println("La entropia de la fuente es: " + calculaEntropia(lista));
+        System.out.println("La entropia de la fuente es: " + Calculadora.getInstance().calculaEntropia(lista));
+    }
+    
+    public static void main(String[] args) {
+        longVar("text.txt");
+        condVar("text.txt");
     }
 
-    public static void calculaProbabilidades(ArrayList<Nodo> lista, int lecturasT) {
-        Iterator<Nodo> it = lista.iterator();
-        Nodo act;
-        while (it.hasNext()) {
-            act = it.next();
-            act.setProbabilidad(lecturasT);
-        }
-    }
-
-    public static double log2(double numero) { // Logaritmo en base 2 (hay que crear la funcion porque java no la trae)
-        double result = (double) (Math.log(numero) / Math.log(2));
-        return result;
-    }
-
-    public static double calculaEntropia(ArrayList<Nodo> lista) {
-        double entropia = 0;
-        double probabilidad;
-        for (int i = 0; i < lista.size(); i++) {
-            probabilidad = lista.get(i).getProbabilidad();
-            entropia += probabilidad * log2(1 / probabilidad);
-        }
-        return entropia;
-    }
 
     public static void longVar(String path) {
         final int MAX;
@@ -74,7 +56,7 @@ public class prueba {
                     palabras.get(i).aumentaOcurrencia();
                 }
             }
-            calculaProbabilidades(palabras, lecturas);
+            Calculadora.getInstance().calculaProbabilidades(palabras, lecturas);
             imprimeLista(palabras);
         } catch (IOException e) {
             System.out.println("Error al abrir el archivo.");
@@ -82,10 +64,6 @@ public class prueba {
         scanner.close();
     }
 
-    public static void main(String[] args) {
-        longVar("text.txt");
-        condVar("text.txt");
-    }
 
     private static void condVar(String path) {
         String act, ant;
