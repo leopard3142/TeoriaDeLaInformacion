@@ -13,7 +13,7 @@ public class prueba {
 
     public static void imprimeLista(ArrayList<Nodo> lista) {
         Iterator<Nodo> it = lista.iterator();
-        System.out.println("|  Palabra     |  Probabilidad  |");
+        System.out.println("|  Palabra     |  Probabilidad  ");
         while (it.hasNext()) {
             System.out.println(it.next().toString());
         }
@@ -41,6 +41,7 @@ public class prueba {
         System.out.println("Ingrese la longitud de cada simbolo");
         MAX = scanner.nextInt();
         caracteres = new char[MAX];
+        Nodo.setCantidadDigitos(MAX);
         try {
             String contenido = Files.readString(Paths.get(path));
             StringReader reader = new StringReader(contenido);
@@ -48,13 +49,8 @@ public class prueba {
                 int i = 0;
                 lecturas++;
                 cadena = String.valueOf(caracteres);
-                while (i<palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) { // recorre la
-                                                                                                        // lista de
-                                                                                                        // nodos a ver
-                                                                                                        // si coincide
-                                                                                                        // alguna
-                                                                                                        // ocurrencia
-                    i++;
+                while (i<palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) {
+                	i++;
                 }
                 if (i == palabras.size()) {
                     palabras.add(new Nodo(cadena));
