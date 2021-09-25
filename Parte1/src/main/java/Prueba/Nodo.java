@@ -2,6 +2,7 @@ package Prueba;
 
 public class Nodo {
     private String palabra;
+    private static int cantidadDigitos;
     private int ocurrencias;
     private double probabilidad;
 
@@ -29,8 +30,16 @@ public class Nodo {
     public double getProbabilidad() {
         return probabilidad;
     }
+    
+    public static int getCantidadDigitos() {
+		return cantidadDigitos;
+	}
 
-    @Override
+	public static void setCantidadDigitos(int cantidad) {
+		cantidadDigitos = cantidad;
+	}
+
+	@Override
     public String toString() {
         String spaces = " ";
         for (int i = 0; i < (10 - this.palabra.length()); i++) {
