@@ -70,11 +70,13 @@ public class Calculadora {
 
     public double calculaEntropiaMarkoviana(double [][] matrizCondicional,double [] vectorEstacionario ){
         double entropia = 0;
+        double entropialocal =0;
         for (int i = 0; i < vectorEstacionario.length; i++) {
             for (int j = 0; j < matrizCondicional.length; j++) {
-                entropia += matrizCondicional[i][j] * log2(1/matrizCondicional[i][j]);
+                entropialocal += matrizCondicional[i][j] * log2(1/matrizCondicional[i][j]);
             }
-            entropia *=vectorEstacionario[i];
+            entropia += entropialocal * vectorEstacionario[i];
+            entropialocal = 0;
         }
         return entropia;
     }
