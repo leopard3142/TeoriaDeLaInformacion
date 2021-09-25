@@ -59,12 +59,10 @@ public class Calculadora {
 				}
 			}
 			Calculadora.getInstance().calculaProbabilidades(palabras, lecturas);
-			imprimeLista(palabras);
 		} catch (IOException e) {
 			System.out.println("Error al abrir el archivo.");
 		}
 		scanner.close();
-		System.out.println("Kraft == " + Calculadora.getInstance().Kraft(palabras));
 	}
 
 	public double[][] condVar(String path) {
@@ -217,7 +215,7 @@ public class Calculadora {
 		return this.Kraft(palabras);
 	}
 	
-	public static void imprimeLista(ArrayList<Nodo> lista) {
+	public void imprimeLista(ArrayList<Nodo> lista) {
 		Iterator<Nodo> it = lista.iterator();
 		System.out.println("|  Palabra     |  Probabilidad  ");
 		while (it.hasNext()) {
