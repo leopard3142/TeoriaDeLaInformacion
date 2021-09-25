@@ -50,10 +50,12 @@ public class Ejecutar {
 	public static void P2_incisoB() {
 		System.out.println("Kraft = " + Calculadora.getInstance().Kraft(palabras));
 		System.out.println("McMillan = " + Calculadora.getInstance().McMillan(palabras));
+		System.out.println("Longitud Media del Codigo = "+Calculadora.getInstance().longitudMedia(palabras));
 	}
 
 	public static void P2_incisoC() {
-
+		System.out.println("Rendimiento = "+Calculadora.getInstance().rendimiento(palabras));
+		System.out.println("Redundancia = "+Calculadora.getInstance().redundancia(palabras));
 	}
 
 	public static void P2_incisoD() {

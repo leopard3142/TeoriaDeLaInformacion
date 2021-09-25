@@ -222,4 +222,30 @@ public class Calculadora {
 		}
 	}
 
+	@SuppressWarnings("static-access")
+	public double longitudMedia(ArrayList<Nodo> palabras) {
+		double longitud=0;
+		int i = 0;
+		while (i < palabras.size()) {
+			longitud += palabras.get(i).getProbabilidad()*palabras.get(i).getCantidadDigitos();
+			i++;
+		}
+		return longitud;
+	}
+	
+	public boolean esCompacto(ArrayList<Nodo> palabras) {
+		boolean condicion = false ;
+		//FALTA
+		return condicion;
+	}
+	
+	public double rendimiento(ArrayList<Nodo> palabras) {
+		return this.calculaEntropia(palabras)/this.longitudMedia(palabras);
+	}
+	
+	public double redundancia(ArrayList<Nodo> palabras) {
+		return 1-rendimiento(palabras);
+	}
+	
+
 }
