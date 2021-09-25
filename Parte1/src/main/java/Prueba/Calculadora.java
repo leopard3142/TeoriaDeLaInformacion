@@ -32,7 +32,7 @@ public class Calculadora {
 		}
 	}
 
-	public void longVar(String path, ArrayList<Nodo> palabras) {
+	public void lecturaEscenarios(String path, ArrayList<Nodo> palabras) {
 		final int MAX;
 		int lecturas = 0;
 		char[] caracteres;
@@ -58,14 +58,14 @@ public class Calculadora {
 					palabras.get(i).aumentaOcurrencia();
 				}
 			}
-			Calculadora.getInstance().calculaProbabilidades(palabras, lecturas);
+			calculaProbabilidades(palabras, lecturas);
 		} catch (IOException e) {
 			System.out.println("Error al abrir el archivo.");
 		}
 		scanner.close();
 	}
 
-	public double[][] condVar(String path) {
+	public double[][] lecturaSuposicionSecuencia(String path) {
 		String act, ant;
 		char[] lectura = new char[2];
 		int cantT = 0;
@@ -94,7 +94,6 @@ public class Calculadora {
 			for (int i = 0; i < mat.length; i++) {
 				for (int j = 0; j < mat.length; j++) {
 					System.out.print(mat[i][j] + " ");
-					;
 				}
 				System.out.println();
 			}
@@ -221,7 +220,6 @@ public class Calculadora {
 		while (it.hasNext()) {
 			System.out.println(it.next().toString());
 		}
-		System.out.println("La entropia de la fuente es: " + Calculadora.getInstance().calculaEntropia(lista));
 	}
 
 }

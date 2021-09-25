@@ -10,7 +10,7 @@ public class Ejecutar {
 
 	public static void main(String[] args) {
 
-		Calculadora.getInstance().longVar("text.txt", palabras);
+		Calculadora.getInstance().lecturaEscenarios("text.txt", palabras);
 
 		P1_incisoA();
 
@@ -30,10 +30,11 @@ public class Ejecutar {
 
 	public static void P1_incisoA() {
 		Calculadora.getInstance().imprimeLista(palabras);
+		System.out.println("La entropia de la fuente es: " + Calculadora.getInstance().calculaEntropia(palabras));
 	}
 
 	public static void P1_incisoB() {
-		matrizCondicional = Calculadora.getInstance().condVar("text.txt");
+		matrizCondicional = Calculadora.getInstance().lecturaSuposicionSecuencia("text.txt");
 	}
 
 	public static void P1_incisoC() {
