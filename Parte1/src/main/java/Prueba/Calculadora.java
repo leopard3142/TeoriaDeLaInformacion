@@ -7,6 +7,7 @@ import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Calculadora {
@@ -200,6 +201,39 @@ public class Calculadora {
 		return entropia;
 	}
 
+	public boolean singular(ArrayList<Nodo> palabras) {
+		Iterator<Nodo> it = palabras.iterator();
+		ArrayList<String> palabrasCodigo = new ArrayList<String>();
+		while (it.hasNext()) {
+			palabrasCodigo.add(it.next().getPalabra());
+		}
+		boolean esSingular = false;
+		Iterator<String> it2 = palabrasCodigo.iterator();
+		while (it2.hasNext() && !esSingular) {
+			esSingular = Collections.frequency(palabrasCodigo, it2.next()) != 1;
+		}
+		return esSingular;
+	}
+
+	public boolean esInstantaneo(ArrayList<Nodo> palabras) {
+		boolean condicionDeCorte = true;
+		Nodo nodoPrefijo,nodoPostfijo;
+		String prefijo;
+		Iterator<Nodo> it = palabras.iterator();
+		Iterator<Nodo> it2;
+		while (it.hasNext() && condicionDeCorte) {
+			nodoPrefijo = it.next();
+			prefijo = nodoPrefijo.getPalabra();
+			it2 = palabras.iterator();
+			while (it2.hasNext() && condicionDeCorte) {
+				nodoPostfijo=it2.next();
+				if(nodoPrefijo!=nodoPostfijo)
+					condicionDeCorte=!nodoPostfijo.getPalabra().startsWith(prefijo);		
+			}
+		}
+		return condicionDeCorte;
+	}
+
 	public float Kraft(ArrayList<Nodo> palabras) {
 		float resultado = 0;
 		int i = 0;
@@ -213,7 +247,7 @@ public class Calculadora {
 	public float McMillan(ArrayList<Nodo> palabras) {
 		return this.Kraft(palabras);
 	}
-	
+
 	public void imprimeLista(ArrayList<Nodo> lista) {
 		Iterator<Nodo> it = lista.iterator();
 		System.out.println("|  Palabra     |  Probabilidad  ");
@@ -224,28 +258,27 @@ public class Calculadora {
 
 	@SuppressWarnings("static-access")
 	public double longitudMedia(ArrayList<Nodo> palabras) {
-		double longitud=0;
+		double longitud = 0;
 		int i = 0;
 		while (i < palabras.size()) {
-			longitud += palabras.get(i).getProbabilidad()*palabras.get(i).getCantidadDigitos();
+			longitud += palabras.get(i).getProbabilidad() * palabras.get(i).getCantidadDigitos();
 			i++;
 		}
 		return longitud;
 	}
-	
+
 	public boolean esCompacto(ArrayList<Nodo> palabras) {
-		boolean condicion = false ;
-		//FALTA
+		boolean condicion = false;
+		// FALTA
 		return condicion;
 	}
-	
+
 	public double rendimiento(ArrayList<Nodo> palabras) {
-		return this.calculaEntropia(palabras)/this.longitudMedia(palabras);
+		return this.calculaEntropia(palabras) / this.longitudMedia(palabras);
 	}
-	
+
 	public double redundancia(ArrayList<Nodo> palabras) {
-		return 1-rendimiento(palabras);
+		return 1 - rendimiento(palabras);
 	}
-	
 
 }

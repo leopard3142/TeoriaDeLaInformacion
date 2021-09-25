@@ -18,11 +18,11 @@ public class Ejecutar {
 
 		P1_incisoC();
 
-		// P2_incisoA();
+		P2_incisoA();
 
 		P2_incisoB();
 
-		// P2_incisoC();
+		P2_incisoC();
 
 		// P2_incisoD();
 
@@ -44,7 +44,16 @@ public class Ejecutar {
 	}
 
 	public static void P2_incisoA() {
-
+		
+		if(Calculadora.getInstance().singular(palabras))
+			System.out.println("Es singular");
+		else
+			System.out.println("Es NO singular");
+		
+		if(Calculadora.getInstance().esInstantaneo(palabras))
+			System.out.println("Es instantaneo");
+		else
+			System.out.println("NO es instantaneo");
 	}
 
 	public static void P2_incisoB() {
