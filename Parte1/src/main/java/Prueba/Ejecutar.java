@@ -30,6 +30,11 @@ public class Ejecutar {
 
 	public static void P1_incisoA() {
 		Calculadora.getInstance().imprimeLista(palabras);
+		double informacion;
+		for (int i = 0; i < palabras.size(); i++) {
+			informacion = Calculadora.getInstance().calculaCantInformacion(palabras.get(i));
+			System.out.println("La informacion de la palabra " + palabras.get(i).getPalabra() + " es : " + informacion + " bits");
+		}
 		System.out.println("La entropia de la fuente es: " + Calculadora.getInstance().calculaEntropia(palabras));
 	}
 

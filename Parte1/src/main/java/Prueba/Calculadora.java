@@ -156,6 +156,11 @@ public class Calculadora {
 		return result;
 	}
 
+	public double calculaCantInformacion(Nodo palabra){
+		double informacion = log2(1/palabra.getProbabilidad());
+		return informacion;
+	}
+
 	public double calculaEntropia(ArrayList<Nodo> lista) {
 		double entropia = 0;
 		double probabilidad;
