@@ -5,6 +5,7 @@ public class Nodo {
 	private static int cantidadDigitos;
 	private int ocurrencias;
 	private double probabilidad;
+	private double cantidadInformacion;
 
 	public Nodo(String palabra) {
 		this.palabra = palabra;
@@ -31,6 +32,14 @@ public class Nodo {
 		return probabilidad;
 	}
 
+	public double getCantidadInformacion() {
+		return cantidadInformacion;
+	}
+
+	public void setCantidadInformacion(double cantidadInformacion) {
+		this.cantidadInformacion = cantidadInformacion;
+	}
+
 	public static int getCantidadDigitos() {
 		return cantidadDigitos;
 	}
@@ -45,6 +54,6 @@ public class Nodo {
 		for (int i = 0; i < (10 - this.palabra.length()); i++) {
 			spaces += " ";
 		}
-		return "|   " + this.palabra + spaces + "| " + this.probabilidad;
+		return "|   " + this.palabra + spaces + "| " + this.probabilidad + " | " + this.cantidadInformacion + " bits";
 	}
 }

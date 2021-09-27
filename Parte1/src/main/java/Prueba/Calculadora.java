@@ -30,6 +30,7 @@ public class Calculadora {
 		while (it.hasNext()) {
 			act = it.next();
 			act.setProbabilidad(lecturasT);
+			act.setCantidadInformacion(log2(1 / act.getProbabilidad()));
 		}
 	}
 
@@ -151,14 +152,9 @@ public class Calculadora {
 		return vector;
 	}
 
-	public double log2(double numero) { // Logaritmo en base 2 (hay que crear la funcion porque java no la trae)
+	public double log2(double numero) {
 		double result = (double) (Math.log(numero) / Math.log(2));
 		return result;
-	}
-
-	public double calculaCantInformacion(Nodo palabra) {
-		double informacion = log2(1 / palabra.getProbabilidad());
-		return informacion;
 	}
 
 	public double calculaEntropia(ArrayList<Nodo> lista) {
@@ -206,18 +202,18 @@ public class Calculadora {
 		return entropia;
 	}
 
-	public boolean singular(ArrayList<Nodo> palabras) {
+	public boolean noSingular(ArrayList<Nodo> palabras) {
 		Iterator<Nodo> it = palabras.iterator();
 		ArrayList<String> palabrasCodigo = new ArrayList<String>();
 		while (it.hasNext()) {
 			palabrasCodigo.add(it.next().getPalabra());
 		}
-		boolean esSingular = false;
+		boolean NOsingular = true;
 		Iterator<String> it2 = palabrasCodigo.iterator();
-		while (it2.hasNext() && !esSingular) {
-			esSingular = Collections.frequency(palabrasCodigo, it2.next()) != 1;
+		while (it2.hasNext() && NOsingular) {
+			NOsingular = Collections.frequency(palabrasCodigo, it2.next()) == 1;
 		}
-		return esSingular;
+		return NOsingular;
 	}
 
 	public boolean esInstantaneo(ArrayList<Nodo> palabras) {
@@ -255,7 +251,7 @@ public class Calculadora {
 
 	public void imprimeLista(ArrayList<Nodo> lista) {
 		Iterator<Nodo> it = lista.iterator();
-		System.out.println("|  Palabra     |  Probabilidad  ");
+		System.out.println("|  Palabra     |    Probabilidad     | Cantidad de Informacion   |");
 		while (it.hasNext()) {
 			System.out.println(it.next().toString());
 		}
