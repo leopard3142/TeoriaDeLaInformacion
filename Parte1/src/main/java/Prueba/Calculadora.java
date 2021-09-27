@@ -156,8 +156,8 @@ public class Calculadora {
 		return result;
 	}
 
-	public double calculaCantInformacion(Nodo palabra){
-		double informacion = log2(1/palabra.getProbabilidad());
+	public double calculaCantInformacion(Nodo palabra) {
+		double informacion = log2(1 / palabra.getProbabilidad());
 		return informacion;
 	}
 
@@ -222,7 +222,7 @@ public class Calculadora {
 
 	public boolean esInstantaneo(ArrayList<Nodo> palabras) {
 		boolean condicionDeCorte = true;
-		Nodo nodoPrefijo,nodoPostfijo;
+		Nodo nodoPrefijo, nodoPostfijo;
 		String prefijo;
 		Iterator<Nodo> it = palabras.iterator();
 		Iterator<Nodo> it2;
@@ -231,9 +231,9 @@ public class Calculadora {
 			prefijo = nodoPrefijo.getPalabra();
 			it2 = palabras.iterator();
 			while (it2.hasNext() && condicionDeCorte) {
-				nodoPostfijo=it2.next();
-				if(nodoPrefijo!=nodoPostfijo)
-					condicionDeCorte=!nodoPostfijo.getPalabra().startsWith(prefijo);		
+				nodoPostfijo = it2.next();
+				if (nodoPrefijo != nodoPostfijo)
+					condicionDeCorte = !nodoPostfijo.getPalabra().startsWith(prefijo);
 			}
 		}
 		return condicionDeCorte;
@@ -272,10 +272,16 @@ public class Calculadora {
 		return longitud;
 	}
 
+	@SuppressWarnings("static-access")
 	public boolean esCompacto(ArrayList<Nodo> palabras) {
-		boolean condicion = false;
-		// FALTA
-		return condicion;
+		double suma = 0;
+		Iterator<Nodo> it = palabras.iterator();
+		Nodo actual;
+		while (it.hasNext()) {
+			actual = it.next();
+			suma += actual.getCantidadDigitos() * actual.getProbabilidad();
+		}
+		return this.longitudMedia(palabras) <= suma;
 	}
 
 	public double rendimiento(ArrayList<Nodo> palabras) {
