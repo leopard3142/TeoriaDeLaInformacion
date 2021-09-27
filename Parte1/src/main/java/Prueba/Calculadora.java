@@ -157,12 +157,13 @@ public class Calculadora {
 		return result;
 	}
 
-	public double calculaEntropia(ArrayList<Nodo> lista) {
+	public double calculaEntropia(ArrayList<Nodo> palabras) {
 		double entropia = 0;
-		double probabilidad;
-		for (int i = 0; i < lista.size(); i++) {
-			probabilidad = lista.get(i).getProbabilidad();
-			entropia += probabilidad * log2(1 / probabilidad);
+		Iterator<Nodo> it = palabras.iterator();
+		Nodo actual;
+		while (it.hasNext()) {
+			actual = it.next();
+			entropia += (double) actual.getProbabilidad()*actual.getCantidadInformacion();
 		}
 		return entropia;
 	}
@@ -235,7 +236,7 @@ public class Calculadora {
 		return condicionDeCorte;
 	}
 
-	public float Kraft(ArrayList<Nodo> palabras) {
+	public double Kraft(ArrayList<Nodo> palabras) {
 		float resultado = 0;
 		int i = 0;
 		while (i < palabras.size()) {
@@ -245,7 +246,7 @@ public class Calculadora {
 		return resultado;
 	}
 
-	public float McMillan(ArrayList<Nodo> palabras) {
+	public double McMillan(ArrayList<Nodo> palabras) {
 		return this.Kraft(palabras);
 	}
 
