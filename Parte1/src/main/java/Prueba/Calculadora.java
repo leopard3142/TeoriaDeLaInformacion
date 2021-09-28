@@ -1,14 +1,15 @@
 package Prueba;
 
-import java.util.Iterator;
-import java.util.Scanner;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Scanner;
 
 public class Calculadora {
 	private static Calculadora single_instance = null;
@@ -370,6 +371,34 @@ public class Calculadora {
 					+ actual.getPalabraHuffman() + "\n";
 		}
 		return respuesta;
+	}
+	
+	public void escrituraEscenario(ArrayList<Nodo> palabras) {
+		final int MAX = Nodo.getCantidadDigitos();
+		
+		char[] caracteres  = new char[MAX];
+		String cadena;
+		String pathEscritura = "codigo" + MAX + ".txt";
+		String pathLectura = "text.txt";
+//		StringBuilder st = new StringBuilder();
+		String codigoNuevo = "";
+		
+		try {
+			String contenido = Files.readString(Paths.get(pathLectura)); //contenido tiene el txt de la catedra
+			StringReader reader = new StringReader(contenido);
+			while (reader.read(caracteres, 0, MAX) != -1) {
+				int i = 0;
+				cadena = String.valueOf(caracteres);
+				while (i < palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) {
+					i++;
+				}
+				
+				codigoNuevo += palabras.get(i).getPalabraHuffman();
+			}
+			Files.writeString(Paths.get(pathEscritura), codigoNuevo, StandardOpenOption.CREATE);
+		} catch (IOException e) {
+			System.out.println("Error al abrir el archivo.");
+		}
 	}
 
 }

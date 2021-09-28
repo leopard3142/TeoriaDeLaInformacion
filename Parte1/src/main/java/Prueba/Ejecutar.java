@@ -74,5 +74,6 @@ public class Ejecutar {
 		ArrayList<NodoHuffman> simbolos = Calculadora.getInstance().armaArrayParaHuffman(palabras);
 		Calculadora.getInstance().huffman(simbolos, palabras);
 		System.out.println(Calculadora.getInstance().resultadosHuffman(palabras));
+		Calculadora.getInstance().escrituraEscenario(palabras);
 	}
 }
