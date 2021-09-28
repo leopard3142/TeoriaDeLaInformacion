@@ -29,7 +29,7 @@ public class Ejecutar {
 	}
 
 	public static void P1_incisoA() {
-		Calculadora.getInstance().imprimeLista(palabras);
+		System.out.println(Calculadora.getInstance().imprimeLista(palabras));
 		System.out.println("La entropia de la fuente es: " + Calculadora.getInstance().calculaEntropia(palabras));
 	}
 

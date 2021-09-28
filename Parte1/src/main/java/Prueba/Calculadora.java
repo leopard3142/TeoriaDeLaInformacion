@@ -250,12 +250,14 @@ public class Calculadora {
 		return this.Kraft(palabras);
 	}
 
-	public void imprimeLista(ArrayList<Nodo> lista) {
+	public String imprimeLista(ArrayList<Nodo> lista) {
+		String respuesta;
 		Iterator<Nodo> it = lista.iterator();
-		System.out.println("|  Palabra     |    Probabilidad     | Cantidad de Informacion   |");
+		respuesta="|  Palabra     |    Probabilidad     | Cantidad de Informacion   |\n";
 		while (it.hasNext()) {
-			System.out.println(it.next().toString());
+			respuesta+=it.next().toString()+"\n";
 		}
+		return respuesta;
 	}
 
 	@SuppressWarnings("static-access")
