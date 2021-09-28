@@ -6,6 +6,19 @@ public class Nodo {
 	private int ocurrencias;
 	private double probabilidad;
 	private double cantidadInformacion;
+	private String palabraHuffman = "";
+
+	public String getPalabraHuffman() {
+		return palabraHuffman;
+	}
+
+	public void setPalabraHuffman(String palabraHuffman) {
+		this.palabraHuffman = palabraHuffman;
+	}
+
+	public void agregarDigitoAHuffman(Integer digito) {
+		this.palabraHuffman += digito.toString();
+	}
 
 	public Nodo(String palabra) {
 		this.palabra = palabra;

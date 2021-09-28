@@ -24,7 +24,7 @@ public class Ejecutar {
 
 		P2_incisoC();
 
-		// P2_incisoD();
+		P2_incisoD();
 
 	}
 
@@ -71,6 +71,8 @@ public class Ejecutar {
 	}
 
 	public static void P2_incisoD() {
-
+		ArrayList<NodoHuffman> simbolos = Calculadora.getInstance().armaArrayParaHuffman(palabras);
+		Calculadora.getInstance().huffman(simbolos, palabras);
+		System.out.println(Calculadora.getInstance().resultadosHuffman(palabras));
 	}
 }
