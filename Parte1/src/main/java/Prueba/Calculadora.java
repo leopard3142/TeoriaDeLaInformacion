@@ -247,9 +247,9 @@ public class Calculadora {
 	public String imprimeLista(ArrayList<Nodo> lista) {
 		String respuesta;
 		Iterator<Nodo> it = lista.iterator();
-		respuesta="|  Palabra     |    Probabilidad     | Cantidad de Informacion   |\n";
+		respuesta = "|  Palabra     |    Probabilidad     | Cantidad de Informacion   |\n";
 		while (it.hasNext()) {
-			respuesta+=it.next().toString()+"\n";
+			respuesta += it.next().toString() + "\n";
 		}
 		return respuesta;
 	}
@@ -265,16 +265,9 @@ public class Calculadora {
 		return longitud;
 	}
 
-	@SuppressWarnings("static-access")
+	
 	public boolean esCompacto(ArrayList<Nodo> palabras) {
-		double suma = 0;
-		Iterator<Nodo> it = palabras.iterator();
-		Nodo actual;
-		while (it.hasNext()) {
-			actual = it.next();
-			suma += actual.getCantidadDigitos() * actual.getProbabilidad();
-		}
-		return this.longitudMedia(palabras) <= suma;
+		return this.longitudMedia(palabras)==this.longitudMediaHoffman(palabras);
 	}
 
 	public double rendimiento(ArrayList<Nodo> palabras) {
@@ -365,19 +358,17 @@ public class Calculadora {
 		}
 		return respuesta;
 	}
-	
+
 	public void escrituraEscenario(ArrayList<Nodo> palabras) {
 		final int MAX = Nodo.getCantidadDigitos();
-		
-		char[] caracteres  = new char[MAX];
+		char[] caracteres = new char[MAX];
 		String cadena;
 		String pathEscritura = "codigo" + MAX + ".txt";
 		String pathLectura = "text.txt";
 //		StringBuilder st = new StringBuilder();
 		String codigoNuevo = "";
-		
 		try {
-			String contenido = Files.readString(Paths.get(pathLectura)); //contenido tiene el txt de la catedra
+			String contenido = Files.readString(Paths.get(pathLectura)); // contenido tiene el txt de la catedra
 			StringReader reader = new StringReader(contenido);
 			while (reader.read(caracteres, 0, MAX) != -1) {
 				int i = 0;
@@ -385,7 +376,6 @@ public class Calculadora {
 				while (i < palabras.size() && !palabras.get(i).getPalabra().equalsIgnoreCase(cadena)) {
 					i++;
 				}
-				
 				codigoNuevo += palabras.get(i).getPalabraHuffman();
 			}
 			Files.writeString(Paths.get(pathEscritura), codigoNuevo, StandardOpenOption.CREATE);
@@ -393,14 +383,12 @@ public class Calculadora {
 			System.out.println("Error al abrir el archivo.");
 		}
 	}
-	
+
 	public double longitudMediaHoffman(ArrayList<Nodo> palabras) {
 		double longitud = 0;
-		
-		for(int i = 0; i<palabras.size(); i++) {
+		for (int i = 0; i < palabras.size(); i++) {
 			longitud += palabras.get(i).getProbabilidad() * palabras.get(i).getPalabraHuffman().length();
 		}
-		
 		return longitud;
 	}
 
