@@ -1,0 +1,35 @@
+ Palabra codigo =  00011   |  Codigo Huffman  11111
+ Palabra codigo =  10101   |  Codigo Huffman  01000
+ Palabra codigo =  11110   |  Codigo Huffman  10111
+ Palabra codigo =  01011   |  Codigo Huffman  10101
+ Palabra codigo =  00001   |  Codigo Huffman  10010
+ Palabra codigo =  01111   |  Codigo Huffman  00010
+ Palabra codigo =  01101   |  Codigo Huffman  11000
+ Palabra codigo =  01001   |  Codigo Huffman  00011
+ Palabra codigo =  00010   |  Codigo Huffman  00101
+ Palabra codigo =  00111   |  Codigo Huffman  01010
+ Palabra codigo =  00000   |  Codigo Huffman  10110
+ Palabra codigo =  11100   |  Codigo Huffman  11001
+ Palabra codigo =  10001   |  Codigo Huffman  00100
+ Palabra codigo =  10100   |  Codigo Huffman  10001
+ Palabra codigo =  01100   |  Codigo Huffman  01011
+ Palabra codigo =  01110   |  Codigo Huffman  00110
+ Palabra codigo =  11010   |  Codigo Huffman  11011
+ Palabra codigo =  01000   |  Codigo Huffman  10100
+ Palabra codigo =  10011   |  Codigo Huffman  11101
+ Palabra codigo =  10000   |  Codigo Huffman  10011
+ Palabra codigo =  11011   |  Codigo Huffman  00000
+ Palabra codigo =  11000   |  Codigo Huffman  10000
+ Palabra codigo =  00110   |  Codigo Huffman  01001
+ Palabra codigo =  10010   |  Codigo Huffman  11110
+ Palabra codigo =  11111   |  Codigo Huffman  00001
+ Palabra codigo =  11101   |  Codigo Huffman  11100
+ Palabra codigo =  10110   |  Codigo Huffman  00111
+ Palabra codigo =  11001   |  Codigo Huffman  01111
+ Palabra codigo =  10111   |  Codigo Huffman  01101
+ Palabra codigo =  00100   |  Codigo Huffman  01110
+ Palabra codigo =  00101   |  Codigo Huffman  11010
+ Palabra codigo =  01010   |  Codigo Huffman  01100
+
+La longitud media del codigo de Huffman es 5.000000000000001
+Por lo tanto la longitud media del codigo se redujo un 0.0%

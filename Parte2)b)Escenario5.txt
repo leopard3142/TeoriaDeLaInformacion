@@ -1,0 +1,4 @@
+Kraft = 1.0
+McMillan = 1.0
+Longitud Media del Codigo = 5.000000000000001
+NO es compacto 

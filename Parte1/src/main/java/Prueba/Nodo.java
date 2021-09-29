@@ -63,10 +63,14 @@ public class Nodo {
 
 	@Override
 	public String toString() {
-		String spaces = " ";
+		String spacesPalabra = " ";
+		String spacesProbabilidad = " ";
 		for (int i = 0; i < (10 - this.palabra.length()); i++) {
-			spaces += " ";
+			spacesPalabra += " ";
 		}
-		return "|   " + this.palabra + spaces + "| " + this.probabilidad + " | " + this.cantidadInformacion + " bits";
+		for (int i = 0; i < (25 - String.valueOf(this.probabilidad).length()); i++) {
+			spacesProbabilidad += " ";
+		}
+		return "|   " + this.palabra + spacesPalabra + "| " + this.probabilidad + spacesProbabilidad +  " | " + this.cantidadInformacion + " bits";
 	}
 }

@@ -35,14 +35,15 @@ public class Calculadora {
 		}
 	}
 
-	public void lecturaEscenarios(String path, ArrayList<Nodo> palabras) {
-		final int MAX;
+	public void lecturaEscenarios(String path, ArrayList<Nodo> palabras, int longitud) {
+		//final int MAX;
 		int lecturas = 0;
 		char[] caracteres;
 		String cadena;
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Ingrese la longitud de cada simbolo: ");
-		MAX = scanner.nextInt();
+		//MAX = scanner.nextInt();
+		int MAX = longitud; // reemplazo MAX por longitud para que se impriman los 3 escenarios.
 		caracteres = new char[MAX];
 		Nodo.setCantidadDigitos(MAX);
 		try {
@@ -93,15 +94,19 @@ public class Calculadora {
 															// actual, columna del anterior
 				ant = act;
 			}
-			System.out.println("---------- Matriz de Ocurrencias ----------");
+			Impresora.getInstance().appendParte1b(("---------- Matriz de Ocurrencias ----------" + '\n'));
 			for (int i = 0; i < mat.length; i++) {
 				for (int j = 0; j < mat.length; j++) {
-					System.out.print(mat[i][j] + " ");
+					//System.out.print(mat[i][j] + " ");
+					Impresora.getInstance().appendParte1b(mat[i][j] + " ");
 				}
-				System.out.println();
+				//System.out.println();
+				Impresora.getInstance().appendParte1b("\n");
 			}
-			System.out.println("----------Ocurrencias totales ---------- ");
-			System.out.println(cantT);
+			//System.out.println("----------Ocurrencias totales ---------- ");
+			//System.out.println(cantT);
+			Impresora.getInstance().appendParte1b(("----------Ocurrencias totales ---------- " + '\n'));
+			Impresora.getInstance().appendParte1b(String.valueOf(cantT) + '\n');
 
 			int[] columnas = new int[4]; // vector para almacenar el total de cada columna
 			int totalcolumna = 0;
@@ -113,14 +118,17 @@ public class Calculadora {
 				columnas[j] = totalcolumna;
 				totalcolumna = 0;
 			}
-			System.out.println("---------- Matriz de probabilidades condicionales ---------- ");
+			//System.out.println("---------- Matriz de probabilidades condicionales ---------- ");
+			Impresora.getInstance().appendParte1b(("---------- Matriz de probabilidades condicionales ---------- " + '\n'));
 			for (int i = 0; i < mat.length; i++) { // calcula la probabilidad de ocurrencia dividiendo por el total de
 													// cada columna
 				for (int j = 0; j < columnas.length; j++) {
 					mat[i][j] /= columnas[j];
-					System.out.print(mat[i][j] + " ");
+					//System.out.print(mat[i][j] + " ");
+					Impresora.getInstance().appendParte1b(mat[i][j] + " ");
 				}
-				System.out.println();
+				//System.out.println();
+				Impresora.getInstance().appendParte1b("\n");
 			}
 		} catch (IOException e) {
 			System.out.println("No se encontro el archivo");
@@ -133,16 +141,21 @@ public class Calculadora {
 		double[] vector = new double[matrizCondicional.length];
 		double[][] matAux = Calculadora.getInstance().calculaPotenciaMatriz(matrizCondicional, 100);
 		double sum = 0;
-		System.out.println("----------Vector estacionario ----------");
+		//System.out.println("----------Vector estacionario ----------");
+		Impresora.getInstance().appendParte1c("----------Vector estacionario ---------- \n");
 		for (int i = 0; i < matrizCondicional.length; i++) {
 			vector[i] = matAux[i][0];
 			sum += vector[i];
-			System.out.print(vector[i] + " ");
-
-			System.out.println();
+			//System.out.print(vector[i] + " ");
+			//System.out.println();
+			Impresora.getInstance().appendParte1c(vector[i] + " ");
+			Impresora.getInstance().appendParte1c("\n");
+			
 		}
-		System.out.println("----------Suma del vector estacionario ----------");
-		System.out.println(sum);
+		//System.out.println("----------Suma del vector estacionario ----------");
+		//System.out.println(sum);
+		Impresora.getInstance().appendParte1c(("----------Suma del vector estacionario ---------- \n"));
+		Impresora.getInstance().appendParte1c(String.valueOf(sum));
 		return vector;
 	}
 
@@ -247,7 +260,7 @@ public class Calculadora {
 	public String imprimeLista(ArrayList<Nodo> lista) {
 		String respuesta;
 		Iterator<Nodo> it = lista.iterator();
-		respuesta = "|  Palabra     |    Probabilidad     | Cantidad de Informacion   |\n";
+		respuesta = "|  Palabra     |       Probabilidad         | Cantidad de Informacion   |\n";
 		while (it.hasNext()) {
 			respuesta += it.next().toString() + "\n";
 		}
@@ -268,6 +281,7 @@ public class Calculadora {
 	
 	public boolean esCompacto(ArrayList<Nodo> palabras) {
 		return this.longitudMedia(palabras)==this.longitudMediaHoffman(palabras);
+
 	}
 
 	public double rendimiento(ArrayList<Nodo> palabras) {
