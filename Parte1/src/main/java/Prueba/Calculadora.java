@@ -338,7 +338,7 @@ public class Calculadora {
 		NodoHuffman aux;
 		for (i = 0; i < A.size() - 1; i++) {
 			for (j = 0; j < A.size() - i - 1; j++) {
-				if (A.get(j + 1).getProbabilidad() < A.get(j).getProbabilidad()) {
+				if (A.get(j + 1).getProbabilidad() > A.get(j).getProbabilidad()) {
 					aux = A.get(j + 1);
 					A.set(j + 1, A.get(j));
 					A.set(j, aux);
