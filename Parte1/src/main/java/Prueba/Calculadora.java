@@ -122,13 +122,6 @@ public class Calculadora {
 				}
 				System.out.println();
 			}
-
-			/*
-			 * for (int i = 0; i < 4; i++) for (int j = 0; j < 4; j++) mat[i][j] /= cantT;
-			 * // se hace el promedio de ocurrencias for (int i = 0; i < 4; i++) { for (int
-			 * j = 0; j < 4; j++) System.out.print(mat[i][j] + " "); System.out.println(); }
-			 */
-
 		} catch (IOException e) {
 			System.out.println("No se encontro el archivo");
 		}
@@ -399,6 +392,16 @@ public class Calculadora {
 		} catch (IOException e) {
 			System.out.println("Error al abrir el archivo.");
 		}
+	}
+	
+	public double longitudMediaHoffman(ArrayList<Nodo> palabras) {
+		double longitud = 0;
+		
+		for(int i = 0; i<palabras.size(); i++) {
+			longitud += palabras.get(i).getProbabilidad() * palabras.get(i).getPalabraHuffman().length();
+		}
+		
+		return longitud;
 	}
 
 }

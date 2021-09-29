@@ -30,6 +30,7 @@ public class Ejecutar {
 
 	public static void P1_incisoA() {
 		System.out.println(Calculadora.getInstance().imprimeLista(palabras));
+		System.out.println("La cantidad de palabras codigo distintas son: " + palabras.size());
 		System.out.println("La entropia de la fuente es: " + Calculadora.getInstance().calculaEntropia(palabras));
 	}
 
@@ -75,5 +76,7 @@ public class Ejecutar {
 		Calculadora.getInstance().huffman(simbolos, palabras);
 		System.out.println(Calculadora.getInstance().resultadosHuffman(palabras));
 		Calculadora.getInstance().escrituraEscenario(palabras);
+		System.out.println("La longitud media del codigo de Huffman es " + Calculadora.getInstance().longitudMediaHoffman(palabras));
+		System.out.println("Por lo tanto la longitud media del codigo se redujo un " + (100 - Calculadora.getInstance().longitudMediaHoffman(palabras) * 100/Calculadora.getInstance().longitudMedia(palabras)) + "%");
 	}
 }
