@@ -41,7 +41,7 @@ public class Calculadora {
 		char[] caracteres;
 		String cadena;
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Ingrese la longitud de cada simbolo: ");
+		//System.out.print("Ingrese la longitud de cada simbolo: ");
 		//MAX = scanner.nextInt();
 		int MAX = longitud; // reemplazo MAX por longitud para que se impriman los 3 escenarios.
 		caracteres = new char[MAX];
