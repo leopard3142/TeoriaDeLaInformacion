@@ -155,7 +155,7 @@ public class Calculadora {
 		//System.out.println("----------Suma del vector estacionario ----------");
 		//System.out.println(sum);
 		Impresora.getInstance().appendParte1c(("----------Suma del vector estacionario ---------- \n"));
-		Impresora.getInstance().appendParte1c(String.valueOf(sum));
+		Impresora.getInstance().appendParte1c(String.valueOf(sum) + "\n");
 		return vector;
 	}
 
