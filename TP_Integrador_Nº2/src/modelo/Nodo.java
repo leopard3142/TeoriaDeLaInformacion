@@ -1,12 +1,24 @@
-package app;
+package modelo;
 
 public class Nodo {
 	private String palabra;
-	private static int cantidadDigitos;
 	private int ocurrencias;
 	private double probabilidad;
 	private double cantidadInformacion;
 	private String palabraHuffman = "";
+	private String palabraShanonFano = "";
+
+	public String getPalabraShanonFano() {
+		return palabraShanonFano;
+	}
+
+	public void setPalabraShanonFano(String palabraShanonFano) {
+		this.palabraShanonFano = palabraShanonFano;
+	}
+
+	public void agregarDigitoShanonFano(Integer digito) {
+		this.palabraShanonFano += digito.toString();
+	}
 
 	public String getPalabraHuffman() {
 		return palabraHuffman;
@@ -41,6 +53,10 @@ public class Nodo {
 		this.probabilidad = this.ocurrencias / lecturasT;
 	}
 
+	public void setProbabilidadDirecta(double probabilidad) {
+		this.probabilidad = probabilidad;
+	}
+
 	public double getProbabilidad() {
 		return probabilidad;
 	}
@@ -53,14 +69,6 @@ public class Nodo {
 		this.cantidadInformacion = cantidadInformacion;
 	}
 
-	public static int getCantidadDigitos() {
-		return cantidadDigitos;
-	}
-
-	public static void setCantidadDigitos(int cantidad) {
-		cantidadDigitos = cantidad;
-	}
-
 	@Override
 	public String toString() {
 		String spacesPalabra = " ";
@@ -71,6 +79,7 @@ public class Nodo {
 		for (int i = 0; i < (25 - String.valueOf(this.probabilidad).length()); i++) {
 			spacesProbabilidad += " ";
 		}
-		return "|   " + this.palabra + spacesPalabra + "| " + this.probabilidad + spacesProbabilidad +  " | " + this.cantidadInformacion + " bits";
+		return "|   " + this.palabra + spacesPalabra + "| " + this.probabilidad + spacesProbabilidad + " | "
+				+ this.cantidadInformacion + " bits\n";
 	}
 }
