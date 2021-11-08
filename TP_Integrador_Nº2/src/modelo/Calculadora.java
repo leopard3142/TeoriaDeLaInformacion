@@ -6,12 +6,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 public abstract class Calculadora {
 
 	// Huffman
-
 	public static ArrayList<NodoHuffman> armaArrayParaHuffman(ArrayList<Nodo> palabras) {
 		NodoHuffman nuevo;
 		ArrayList<NodoHuffman> simbolos = new ArrayList<NodoHuffman>();
@@ -184,6 +182,7 @@ public abstract class Calculadora {
 
 	// RLC
 	public static String RLC(String path) {
+		@SuppressWarnings("unused")
 		int totalCaracteres = 0;
 		String respuestaRLC = "";
 		char[] caracteres;
