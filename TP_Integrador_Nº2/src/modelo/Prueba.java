@@ -1,5 +1,11 @@
 package modelo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 public class Prueba {
@@ -20,18 +26,17 @@ public class Prueba {
 		System.out.println(Calculadora.resultadosHuffman(chars));
 
 		// Shanon-Fano
-		// ArrayList<NodoShanonFano> palabrasShanonFano =
-		// Calculadora.armaArrayParaShanonFano(chars);
-		// Calculadora.shanonFano(palabrasShanonFano, chars);
-		// System.out.println(Calculadora.resultadosShanonFano(chars));
+		ArrayList<NodoShanonFano> palabrasShanonFano = Calculadora.armaArrayParaShanonFano(chars);
+		Calculadora.shanonFano(palabrasShanonFano, chars);
+		System.out.println(Calculadora.resultadosShanonFano(chars));
 
 		// RLC
 		// retorna en un String el archivo codificado ya sea txt o raw
 		// habria que hacer el metodo de la escritura
-		System.out.println(Calculadora.RLC(path1));
+		// System.out.println(Calculadora.RLC(path1));
 
-		Archivos.escritura(path1, chars, "ResultadoHuffman.Huf", "Huffman");
-		Archivos.escritura(path1, chars, "ResultadoShanonFano.Fan", "Shanon-Fano");
+		Archivos.escritura(path1, chars, "Argentina.huf", "Huffman");
+		Archivos.escritura(path1, chars, "Argentina.fan", "Shanon-Fano");
 
 	}
 

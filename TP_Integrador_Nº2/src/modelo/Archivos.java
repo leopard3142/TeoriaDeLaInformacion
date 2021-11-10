@@ -43,57 +43,59 @@ public abstract class Archivos {
 
 	@SuppressWarnings("unused")
 	public static void escritura(String path, ArrayList<Nodo> chars, String pathResultado, String metodo) {
-		FileOutputStream fos = null;
-		DataOutputStream salida = null;
+		// metodo para leer en memoria el archivo original
+		String contenido = "";
 		try {
-			fos = new FileOutputStream(pathResultado);
-			salida = new DataOutputStream(fos);
-			int totalCaracteres = 0;
-			char[] caracteres;
-			String caracterLeido;
-			int MAX = 1;
-			caracteres = new char[MAX];
-			try {
-				String contenido = Files.readString(Paths.get(path));
-				StringReader reader = new StringReader(contenido);
-				while (reader.read(caracteres, 0, MAX) != -1) {
-					totalCaracteres++;
-					caracterLeido = String.valueOf(caracteres);
-					// busca el caracter leido en chars
-					Iterator<Nodo> it = chars.iterator();
-					Nodo actual;
-					boolean seEncontroCaracter = false;
-					while (it.hasNext() && !seEncontroCaracter) {
-						actual = it.next();
-						if (actual.getPalabra().equals(caracterLeido)) {
-							seEncontroCaracter = true;
-						}
-						// reemplaza por huffman o hsanon fano segun corresponda"
-						if (metodo.equalsIgnoreCase("Huffman")) {
-							salida.writeBytes(actual.getPalabraHuffman());
-						} else { // metodo.equalsIgnoreCase("Shanon-Fano")
-
-							salida.writeBytes(actual.getPalabraShanonFano());
-						}
+			contenido = Files.readString(Paths.get(path));
+		} catch (IOException e) {
+			System.out.println("Error al abrir el archivo.");
+		}
+		// metodo para reemplazar cada letra de contenido por su codigo binario Huffman
+		// de chars
+		String resultado = "";
+		// me fijo si el metodo es huffman o shannon
+		if (metodo.equalsIgnoreCase("huffman")) {
+			for (int i = 0; i < contenido.length(); i++) {
+				String letra = contenido.substring(i, i + 1);
+				for (int j = 0; j < chars.size(); j++) {
+					if (chars.get(j).getPalabra().equals(letra)) {
+						resultado += chars.get(j).getPalabraHuffman();
 					}
-				}
-			} catch (FileNotFoundException e) {
-				System.out.println(e.getMessage());
-			} catch (IOException e) {
-				System.out.println(e.getMessage());
-			} finally {
-				try {
-					if (fos != null) {
-						fos.close();
-					}
-					if (salida != null) {
-						salida.close();
-					}
-				} catch (IOException e) {
-					System.out.println(e.getMessage());
 				}
 			}
+		} else {
+			if (metodo.equalsIgnoreCase("Shanon-Fano")) {
+				for (int i = 0; i < contenido.length(); i++) {
+					String letra = contenido.substring(i, i + 1);
+					for (int j = 0; j < chars.size(); j++) {
+						if (chars.get(j).getPalabra().equals(letra)) {
+							resultado += chars.get(j).getPalabraShanonFano();
+						}
+					}
+				}
+			}
+		}
+		System.out.println(resultado);
+		// escribe en un archivo el resultado txt para visualizarlo
+		try {
+			FileWriter fw = new FileWriter(pathResultado + ".txt");
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(resultado);
+			bw.close();
 		} catch (IOException e) {
+			System.out.println("Error al escribir el archivo.");
+		}
+
+		// escribe el archivo de salida en binario
+		FileOutputStream fos2 = null;
+		try {
+			fos2 = new FileOutputStream(pathResultado);
+			BitGenerator bitGenerator = new BitGenerator(fos2);
+			for (int i = 0; i < resultado.length(); i++) {
+				bitGenerator.writeBit(resultado.charAt(i) - '0');
+			}
+			bitGenerator.flush(); // flush para los bits que queden en el buffer
+		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
 	}
