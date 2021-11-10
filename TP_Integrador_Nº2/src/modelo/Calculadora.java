@@ -1,9 +1,12 @@
 package modelo;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -181,37 +184,89 @@ public abstract class Calculadora {
 	}
 
 	// RLC
+	// public static String RLC(String path) {
+	// @SuppressWarnings("unused")
+	// int totalCaracteres = 0;
+	// String respuestaRLC = "";
+	// char[] caracteres;
+	// String cadena;
+	// int MAX = 1; // leo de a una letra
+	// caracteres = new char[MAX];
+	// try {
+	// String contenido = Files.readString(Paths.get(path));
+	// StringReader reader = new StringReader(contenido);
+	// while (reader.read(caracteres, 0, MAX) != -1) {
+	// totalCaracteres++;
+	// cadena = String.valueOf(caracteres);
+	// int repeticiones = 1;
+	// String siguiente = "";
+	// boolean salida = true;
+	// while ((repeticiones == 1 || cadena.equals(siguiente)) && salida) {
+	// repeticiones++;
+	// if (reader.read(caracteres, 0, MAX) != -1)
+	// siguiente = String.valueOf(caracteres);
+	// else
+	// salida = false;
+	// }
+	// respuestaRLC += cadena;
+	// respuestaRLC += String.valueOf(repeticiones);
+	// }
+	// } catch (IOException e) {
+	// System.out.println("Error al abrir el archivo.");
+	// }
+	// return respuestaRLC;
+	// }
+
 	public static String RLC(String path) {
-		@SuppressWarnings("unused")
-		int totalCaracteres = 0;
 		String respuestaRLC = "";
-		char[] caracteres;
-		String cadena;
-		int MAX = 1; // leo de a una letra
-		caracteres = new char[MAX];
+		final StringBuilder builder = new StringBuilder();
 		try {
-			String contenido = Files.readString(Paths.get(path));
-			StringReader reader = new StringReader(contenido);
-			while (reader.read(caracteres, 0, MAX) != -1) {
-				totalCaracteres++;
-				cadena = String.valueOf(caracteres);
-				int repeticiones = 1;
-				String siguiente = "";
-				boolean salida = true;
-				while ((repeticiones == 1 || cadena.equals(siguiente)) && salida) {
-					repeticiones++;
-					if (reader.read(caracteres, 0, MAX) != -1)
-						siguiente = String.valueOf(caracteres);
-					else
-						salida = false;
+			if (path.contains(".txt")) {
+				String source = Files.readString(Paths.get(path));
+				for (int i = 0; i < source.length(); i++) {
+					int repeticiones = 1;
+					while (i + 1 < source.length() && source.charAt(i) == source.charAt(i + 1)) {
+						repeticiones++;
+						i++;
+					}
+					builder.append(repeticiones);
+					builder.append(source.charAt(i));
 				}
-				respuestaRLC += cadena;
-				respuestaRLC += String.valueOf(repeticiones);
+			} else {
+				if (path.contains(".raw")) {
+					System.out.println("Entra al raw");
+					FileReader f = new FileReader(path);
+					BufferedReader b = new BufferedReader(f);
+					String pixels1 = b.readLine();
+					String pixels2 = b.readLine();
+					String cadenaAnterior = b.readLine();
+					String cadenaActual = b.readLine();
+					int repeticiones = 0;
+					int iteraciones = 0;
+					while (cadenaActual != null) {
+						iteraciones++;
+						while (cadenaActual != null && cadenaActual.equals(cadenaAnterior)) {
+							repeticiones++;
+							cadenaAnterior = cadenaActual;
+							cadenaActual = b.readLine();
+							iteraciones++;
+						}
+
+						builder.append(repeticiones);
+						builder.append(" ");
+						builder.append(cadenaAnterior);
+						builder.append(" ");
+						cadenaAnterior = cadenaActual;
+						repeticiones = 0;
+					}
+					b.close();
+				}
 			}
+
 		} catch (IOException e) {
 			System.out.println("Error al abrir el archivo.");
 		}
+		respuestaRLC = builder.toString();
 		return respuestaRLC;
 	}
-
 }
