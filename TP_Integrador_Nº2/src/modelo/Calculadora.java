@@ -230,7 +230,11 @@ public abstract class Calculadora {
 						i++;
 					}
 					builder.append(repeticiones);
-					builder.append(source.charAt(i));
+					if (source.charAt(i) != '\n')
+						builder.append(source.charAt(i));
+					else {
+						builder.append("\n");
+					}
 				}
 			} else {
 				if (path.contains(".raw")) {

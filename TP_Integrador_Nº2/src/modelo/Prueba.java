@@ -13,6 +13,7 @@ public class Prueba {
 	public static void main(String[] args) {
 		String path1 = "Argentina.txt";
 		String path2 = "imagen.raw";
+		String path3 = "Rumano.txt";
 		ArrayList<Nodo> chars = new ArrayList<Nodo>();
 		Archivos.lectura(path1, chars);
 		// en chars esta todo, equivale a palabras en el TP1
@@ -33,10 +34,15 @@ public class Prueba {
 		// RLC
 		// retorna en un String el archivo codificado ya sea txt o raw
 		// habria que hacer el metodo de la escritura
-		// System.out.println(Calculadora.RLC(path1));
+		String rlcArgentina = Calculadora.RLC(path1);
+		String rlcImagen = Calculadora.RLC(path2);
+		String rlcRumano = Calculadora.RLC(path3);
 
 		Archivos.escritura(path1, chars, "Argentina.huf", "Huffman");
 		Archivos.escritura(path1, chars, "Argentina.fan", "Shanon-Fano");
+		Archivos.escrituraRLC("Argentina.RLC", rlcArgentina);
+		Archivos.escrituraRLC("imagen.RLC", rlcImagen);
+		Archivos.escrituraRLC("Rumano.RLC", rlcRumano);
 
 	}
 

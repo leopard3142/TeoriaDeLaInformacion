@@ -100,6 +100,18 @@ public abstract class Archivos {
 		}
 	}
 
+	// metodo para escribir en archivo el String de RLC
+	public static void escrituraRLC(String pathResultado, String rlc) {
+		try {
+			FileWriter fw = new FileWriter(pathResultado);
+			BufferedWriter bw = new BufferedWriter(fw);
+			bw.write(rlc);
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Error al escribir el archivo.");
+		}
+	}
+
 	public static double log2(double numero) {
 		double result = (double) (Math.log(numero) / Math.log(2));
 		return result;
