@@ -16,6 +16,7 @@ public class Prueba {
 		String path3 = "Rumano.txt";
 		ArrayList<Nodo> chars = new ArrayList<Nodo>();
 		Archivos.lectura(path1, chars);
+
 		// en chars esta todo, equivale a palabras en el TP1
 		// huffman y ShanonFano crean los codigos en los atributos de cada nodo de chars
 		// en cambio el RLC crea directamente el string que iria en el archivo
@@ -42,7 +43,7 @@ public class Prueba {
 		Archivos.escritura(path1, chars, "Argentina.fan", "Shanon-Fano");
 		Archivos.escrituraRLC("Argentina.RLC", rlcArgentina);
 		Archivos.escrituraRLC("imagen.RLC", rlcImagen);
-		Archivos.escrituraRLC("Rumano.RLC", rlcRumano);
+		// Archivos.escrituraRLC("Rumano.RLC", rlcRumano);
 
 	}
 

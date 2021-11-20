@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Time;
+import java.text.ParsePosition;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 public abstract class Calculadora {
 
@@ -223,18 +228,41 @@ public abstract class Calculadora {
 		try {
 			if (path.contains(".txt")) {
 				String source = Files.readString(Paths.get(path));
+				ArrayList<String> uniqueChars = new ArrayList<String>();
+				int repeticionesMax = 0;
 				for (int i = 0; i < source.length(); i++) {
 					int repeticiones = 1;
+
 					while (i + 1 < source.length() && source.charAt(i) == source.charAt(i + 1)) {
 						repeticiones++;
 						i++;
 					}
-					builder.append(repeticiones);
-					if (source.charAt(i) != '\n')
-						builder.append(source.charAt(i));
-					else {
-						builder.append("\n");
+					if (repeticiones > repeticionesMax) {
+						repeticionesMax = repeticiones;
 					}
+					if (!uniqueChars.contains(source.charAt(i))) {
+						uniqueChars.add(source.charAt(i) + "");
+					}
+				}
+				for (int i = 0; i < source.length(); i++) {
+					int repeticiones = 1;
+
+					while (i + 1 < source.length() && source.charAt(i) == source.charAt(i + 1)) {
+						repeticiones++;
+						i++;
+					}
+					int cadenasDistintas = uniqueChars.size();
+					int bytesRepeticiones = (int) Math.ceil(Math.log(repeticionesMax) / (Math.log(2) * 8));
+					int bytesCodigo = (int) Math.ceil(Math.log(cadenasDistintas) / (Math.log(2) * 8));
+					String simboloBinario = Integer.toBinaryString(source.charAt(i));
+					String padding1 = String.format("%" + bytesCodigo * 8 + "s", simboloBinario.replace(' ', '0'))
+							.replace(' ', '0');
+					builder.append(padding1);
+					String padding = String
+							.format("%" + bytesRepeticiones * 8 + "s", Integer.toBinaryString(repeticiones))
+							.replace(' ', '0');
+					builder.append(padding);
+					builder.append(Integer.toBinaryString(repeticiones));
 				}
 			} else {
 				if (path.contains(".raw")) {
@@ -246,7 +274,39 @@ public abstract class Calculadora {
 					String cadenaAnterior = b.readLine();
 					String cadenaActual = b.readLine();
 					int repeticiones = 0;
+					// array of unique elements
+					ArrayList<String> uniqueChars = new ArrayList<String>();
+					int repeticionesMax = 0;
+					// primera pasada para saber la cantidad de bytes necesarios para representar
+					// cada simbolo y sus repeticiones
+					while (cadenaActual != null) {
+						if (!uniqueChars.contains(cadenaActual)) {
+							uniqueChars.add(cadenaActual);
+						}
+						while (cadenaActual != null && cadenaActual.equals(cadenaAnterior)) {
+							repeticiones++;
+							cadenaAnterior = cadenaActual;
+							cadenaActual = b.readLine();
+						}
+						if (repeticiones > repeticionesMax)
+							repeticionesMax = repeticiones;
+						cadenaAnterior = cadenaActual;
+						repeticiones = 0;
+					}
+					b.close();
+					// segunda pasada sabiendo cuantos bytes necesito de repeticiones y de codigo
+
+					f = new FileReader(path);
+					b = new BufferedReader(f);
 					int iteraciones = 0;
+					pixels1 = b.readLine();
+					pixels2 = b.readLine();
+					cadenaAnterior = b.readLine();
+					cadenaActual = b.readLine();
+					int aux = 0;
+					int cadenasDistintas = uniqueChars.size();
+					int bytesRepeticiones = (int) Math.ceil(Math.log(repeticionesMax) / (Math.log(2) * 8));
+					int bytesCodigo = (int) Math.ceil(Math.log(cadenasDistintas) / (Math.log(2) * 8));
 					while (cadenaActual != null) {
 						iteraciones++;
 						while (cadenaActual != null && cadenaActual.equals(cadenaAnterior)) {
@@ -255,22 +315,30 @@ public abstract class Calculadora {
 							cadenaActual = b.readLine();
 							iteraciones++;
 						}
-
-						builder.append(repeticiones);
-						builder.append(" ");
-						builder.append(cadenaAnterior);
-						builder.append(" ");
+						String simboloBinario = Integer.toBinaryString(Integer.parseInt(cadenaAnterior));
+						String padding1 = String.format("%" + bytesCodigo * 8 + "s", simboloBinario.replace(' ', '0'))
+								.replace(' ', '0');
+						builder.append(padding1);
+						String padding = String
+								.format("%" + bytesRepeticiones * 8 + "s", Integer.toBinaryString(repeticiones))
+								.replace(' ', '0');
+						builder.append(padding);
 						cadenaAnterior = cadenaActual;
 						repeticiones = 0;
+
 					}
-					b.close();
+
+					System.out.println("BYTES NEEDED REPETICIONES: " + bytesRepeticiones);
+					System.out.println("BYTES NEEDED CODIGO: " + bytesCodigo);
 				}
 			}
 
 		} catch (IOException e) {
 			System.out.println("Error al abrir el archivo.");
 		}
+
 		respuestaRLC = builder.toString();
 		return respuestaRLC;
 	}
+
 }
