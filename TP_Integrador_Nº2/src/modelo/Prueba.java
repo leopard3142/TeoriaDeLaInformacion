@@ -15,7 +15,7 @@ public class Prueba {
 		String path2 = "imagen.raw";
 		String path3 = "Rumano.txt";
 		ArrayList<Nodo> chars = new ArrayList<Nodo>();
-		Archivos.lectura(path3, chars);
+		Archivos.lectura(path1, chars);
 
 		// Huffman
 		ArrayList<NodoHuffman> palabrasHuffman = Calculadora.armaArrayParaHuffman(chars);

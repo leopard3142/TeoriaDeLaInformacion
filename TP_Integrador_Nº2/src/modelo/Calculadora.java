@@ -333,6 +333,7 @@ public abstract class Calculadora {
 	}
 
 	public static double rendimiento(ArrayList<Nodo> chars, String metodo) {
+		System.out.println("Longitud media de " + metodo + ": " + longitudMedia(chars, metodo));
 		return calculaEntropia(chars) / longitudMedia(chars, metodo);
 	}
 

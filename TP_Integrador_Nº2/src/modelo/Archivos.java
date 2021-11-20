@@ -77,14 +77,14 @@ public abstract class Archivos {
 		}
 		// System.out.println(resultado);
 		// escribe en un archivo el resultado txt para visualizarlo
-		try {
-			FileWriter fw = new FileWriter(pathResultado + ".txt");
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(resultado);
-			bw.close();
-		} catch (IOException e) {
-			System.out.println("Error al escribir el archivo.");
-		}
+		// try {
+		// FileWriter fw = new FileWriter(pathResultado + ".txt");
+		// BufferedWriter bw = new BufferedWriter(fw);
+		// bw.write(resultado);
+		// bw.close();
+		// } catch (IOException e) {
+		// System.out.println("Error al escribir el archivo.");
+		// }
 
 		// escribe el archivo de salida en binario
 		FileOutputStream fos2 = null;
@@ -102,14 +102,14 @@ public abstract class Archivos {
 
 	// metodo para escribir en archivo el String de RLC
 	public static void escrituraRLC(String pathResultado, String rlc) {
-		try {
-			FileWriter fw = new FileWriter(pathResultado + ".txt");
-			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(rlc);
-			bw.close();
-		} catch (IOException e) {
-			System.out.println("Error al escribir el archivo.");
-		}
+		// try {
+		// FileWriter fw = new FileWriter(pathResultado + ".txt");
+		// BufferedWriter bw = new BufferedWriter(fw);
+		// bw.write(rlc);
+		// bw.close();
+		// } catch (IOException e) {
+		// System.out.println("Error al escribir el archivo.");
+		// }
 		FileOutputStream fos2 = null;
 		try {
 			fos2 = new FileOutputStream(pathResultado);
