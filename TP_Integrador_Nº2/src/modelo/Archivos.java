@@ -75,7 +75,7 @@ public abstract class Archivos {
 				}
 			}
 		}
-		System.out.println(resultado);
+		// System.out.println(resultado);
 		// escribe en un archivo el resultado txt para visualizarlo
 		try {
 			FileWriter fw = new FileWriter(pathResultado + ".txt");
@@ -103,12 +103,23 @@ public abstract class Archivos {
 	// metodo para escribir en archivo el String de RLC
 	public static void escrituraRLC(String pathResultado, String rlc) {
 		try {
-			FileWriter fw = new FileWriter(pathResultado);
+			FileWriter fw = new FileWriter(pathResultado + ".txt");
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(rlc);
 			bw.close();
 		} catch (IOException e) {
 			System.out.println("Error al escribir el archivo.");
+		}
+		FileOutputStream fos2 = null;
+		try {
+			fos2 = new FileOutputStream(pathResultado);
+			BitGenerator bitGenerator = new BitGenerator(fos2);
+			for (int i = 0; i < rlc.length(); i++) {
+				bitGenerator.writeBit(rlc.charAt(i) - '0');
+			}
+			bitGenerator.flush(); // flush para los bits que queden en el buffer
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
