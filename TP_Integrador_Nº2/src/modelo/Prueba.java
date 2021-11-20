@@ -40,6 +40,10 @@ public class Prueba {
 
 		Archivos.escritura(path1, chars, "Argentina.huf", "Huffman");
 		Archivos.escritura(path1, chars, "Argentina.fan", "Shanon-Fano");
+		Archivos.escritura(path1, chars, "Rumano.huf", "Huffman");
+		Archivos.escritura(path1, chars, "Rumano.fan", "Shanon-Fano");
+		Archivos.escritura(path1, chars, "imagen.huf", "Huffman");
+		Archivos.escritura(path1, chars, "imagen.fan", "Shanon-Fano");
 		Archivos.escrituraRLC("Argentina.RLC", rlcArgentina);
 		Archivos.escrituraRLC("imagen.RLC", rlcImagen);
 		Archivos.escrituraRLC("Rumano.RLC", rlcRumano);
