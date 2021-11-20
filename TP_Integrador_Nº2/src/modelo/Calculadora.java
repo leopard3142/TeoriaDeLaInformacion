@@ -10,6 +10,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+
 public abstract class Calculadora {
 
 	// Huffman
@@ -183,39 +184,6 @@ public abstract class Calculadora {
 		return respuesta;
 	}
 
-	// RLC
-	// public static String RLC(String path) {
-	// @SuppressWarnings("unused")
-	// int totalCaracteres = 0;
-	// String respuestaRLC = "";
-	// char[] caracteres;
-	// String cadena;
-	// int MAX = 1; // leo de a una letra
-	// caracteres = new char[MAX];
-	// try {
-	// String contenido = Files.readString(Paths.get(path));
-	// StringReader reader = new StringReader(contenido);
-	// while (reader.read(caracteres, 0, MAX) != -1) {
-	// totalCaracteres++;
-	// cadena = String.valueOf(caracteres);
-	// int repeticiones = 1;
-	// String siguiente = "";
-	// boolean salida = true;
-	// while ((repeticiones == 1 || cadena.equals(siguiente)) && salida) {
-	// repeticiones++;
-	// if (reader.read(caracteres, 0, MAX) != -1)
-	// siguiente = String.valueOf(caracteres);
-	// else
-	// salida = false;
-	// }
-	// respuestaRLC += cadena;
-	// respuestaRLC += String.valueOf(repeticiones);
-	// }
-	// } catch (IOException e) {
-	// System.out.println("Error al abrir el archivo.");
-	// }
-	// return respuestaRLC;
-	// }
 
 	public static String RLC(String path) {
 		String respuestaRLC = "";
@@ -273,4 +241,40 @@ public abstract class Calculadora {
 		respuestaRLC = builder.toString();
 		return respuestaRLC;
 	}
+	
+	public static double calculaEntropia(ArrayList<Nodo> palabras) {
+		double entropia = 0;
+		Iterator<Nodo> it = palabras.iterator();
+		Nodo actual;
+		while (it.hasNext()) {
+			actual = it.next();
+			entropia += (double) actual.getProbabilidad() * actual.getCantidadInformacion();
+		}
+		return entropia;
+	}
+	public static double longitudMedia(ArrayList<Nodo> palabras,String metodo) {
+		double longitud = 0;
+		int i = 0;
+		if(metodo.equalsIgnoreCase("huffman"))
+			while (i < palabras.size()) {
+				longitud += palabras.get(i).getProbabilidad() * palabras.get(i).getPalabraHuffman().length();
+				i++;
+			}
+		else if (metodo.equalsIgnoreCase("shanon-fano")) {
+			while (i < palabras.size()) {
+				longitud += palabras.get(i).getProbabilidad() * palabras.get(i).getPalabraShanonFano().length();
+				i++;
+			}
+		}
+		return longitud;
+	}
+
+	public static double rendimiento(ArrayList<Nodo> chars,String metodo) {
+		return calculaEntropia(chars) / longitudMedia(chars,metodo);
+	}
+
+	public static double redundancia(ArrayList<Nodo> chars,String metodo) {
+		return 1 - rendimiento(chars,metodo);
+	}
+
 }
