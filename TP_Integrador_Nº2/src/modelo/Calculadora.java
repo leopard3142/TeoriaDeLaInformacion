@@ -189,11 +189,10 @@ public abstract class Calculadora {
 		try {
 			if (path.contains(".txt")) {
 				String source = Files.readString(Paths.get(path));
-				ArrayList<String> uniqueChars = new ArrayList<String>();
+				ArrayList<Character> uniqueChars = new ArrayList<Character>();
 				int repeticionesMax = 0;
 				for (int i = 0; i < source.length(); i++) {
 					int repeticiones = 1;
-
 					while (i + 1 < source.length() && source.charAt(i) == source.charAt(i + 1)) {
 						repeticiones++;
 						i++;
@@ -202,9 +201,12 @@ public abstract class Calculadora {
 						repeticionesMax = repeticiones;
 					}
 					if (!uniqueChars.contains(source.charAt(i))) {
-						uniqueChars.add(source.charAt(i) + "");
+						uniqueChars.add(source.charAt(i));
 					}
 				}
+				int cadenasDistintas = uniqueChars.size();
+				int bytesRepeticiones = (int) Math.ceil(Math.log(repeticionesMax) / (Math.log(2) * 8));
+				int bytesCodigo = (int) Math.ceil(Math.log(cadenasDistintas) / (Math.log(2) * 8));
 				for (int i = 0; i < source.length(); i++) {
 					int repeticiones = 1;
 
@@ -212,9 +214,6 @@ public abstract class Calculadora {
 						repeticiones++;
 						i++;
 					}
-					int cadenasDistintas = uniqueChars.size();
-					int bytesRepeticiones = (int) Math.ceil(Math.log(repeticionesMax) / (Math.log(2) * 8));
-					int bytesCodigo = (int) Math.ceil(Math.log(cadenasDistintas) / (Math.log(2) * 8));
 					String simboloBinario = Integer.toBinaryString(source.charAt(i));
 					String padding1 = String.format("%" + bytesCodigo * 8 + "s", simboloBinario.replace(' ', '0'))
 							.replace(' ', '0');
@@ -225,6 +224,9 @@ public abstract class Calculadora {
 					builder.append(padding);
 					builder.append(Integer.toBinaryString(repeticiones));
 				}
+				System.out.println("PATH: " + path);
+				System.out.println("BYTES NEEDED REPETICIONES: " + bytesRepeticiones);
+				System.out.println("BYTES NEEDED CODIGO: " + bytesCodigo);
 			} else {
 				if (path.contains(".raw")) {
 					System.out.println("Entra al raw");
@@ -288,7 +290,7 @@ public abstract class Calculadora {
 						repeticiones = 0;
 
 					}
-
+					System.out.println("PATH: " + path);
 					System.out.println("BYTES NEEDED REPETICIONES: " + bytesRepeticiones);
 					System.out.println("BYTES NEEDED CODIGO: " + bytesCodigo);
 				}
@@ -331,6 +333,7 @@ public abstract class Calculadora {
 	}
 
 	public static double rendimiento(ArrayList<Nodo> chars, String metodo) {
+		System.out.println("Longitud media de " + metodo + ": " + longitudMedia(chars, metodo));
 		return calculaEntropia(chars) / longitudMedia(chars, metodo);
 	}
 
