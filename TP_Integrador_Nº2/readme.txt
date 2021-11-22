@@ -1,0 +1,1 @@
+El archivo "ejecutable.jar" debe tener en la misma carpeta el "Argentina.txt", "Rumano.txt" y "imagen.raw" respetando las mayusculas como estan en este help. La escritura y generacion de todos los archivos suele tardar bastante.
